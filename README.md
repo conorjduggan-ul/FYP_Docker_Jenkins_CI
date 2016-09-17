@@ -2,7 +2,7 @@
 Using Docker containers to improve the efficiency (success, time and cost) of a Continuous Integration environment.
 
 
-Overview
+### Overview
 
 The aim of this project is to demonstrate how using Docker containerisation software can help increase the efficiency (success, time and cost) of a Continuous Integration (CI) software development environment.
 The setup and architecture of a CI environment usually requires the resources of multiple server machines and as the scale of the software product grows, so does the CI environment. However, running such a network of machines comes with many costs e.g. the purchase and installation of the machines, the cost of employing an infrastructure engineering team for maintenance and the cost of replacing old unusable servers. From a build engineering point of view, all of these machines will ideally be identical in both the development environment and the production environment hosting the application. Unfortunately, it is highly unlikely that this will ever be true, meaning it cannot be guaranteed that the outcome of the various stages of CI will always be the same.
@@ -14,7 +14,7 @@ There are a few ways to go about using Docker to replace hardware machines, alth
 My plan for this project is to setup and configure an example of how Docker containers can be used to run CI build and test plans. I want to research how such a setup could help to reduce the cost of maintaining a CI environment like I mentioned above, how the concept of isolated containers can increase the success of CI plans compared with plans executed on a single hardware machine and how this increase in success would help to reduce the amount of time the CI process takes, from developer code check-in to ready for production.
 
 
-Objectives
+### Objectives
 
 - Demonstrate the use of Docker containers in a Continuous Integration environment.
 - Investigate how using Docker containers will speed up the overall running time of the CI
