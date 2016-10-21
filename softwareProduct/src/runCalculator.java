@@ -4,7 +4,7 @@
 
 	Project Title: FYP Software Product - Calculator
 
-	Usage: In the terminal, type an operator name e.g. add, subtract, multiply, divide followed by two operands.
+	Usage:
 */
 
 public class runCalculator {
