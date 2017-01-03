@@ -13,8 +13,8 @@ RUN yum install -y git && \
          yum clean all
 
 # Download and install jdk
-RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-lin
-        rpm -Uvh jdk-8u60-linux-x64.rpm
+RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u112-b15/jdk-8u112-linux-x64.rpm 
+RUN rpm -Uvh jdk-8u112-linux-x64.rpm
 
 # generate ssh keys
 RUN /usr/bin/ssh-keygen -A
