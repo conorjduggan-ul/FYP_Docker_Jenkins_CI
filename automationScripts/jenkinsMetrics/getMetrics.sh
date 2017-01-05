@@ -11,8 +11,9 @@ declare -a planArray=("Pipeline_2/job/01_Compile_Project"
 # Loop through stored plan URLs
 for planURL in "${planArray[@]}"
 do
+	echo "${JENKINS_IP_AND_PORT_GLOBAL_VAR}/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog"
 	# Download log file of last successful Jenkins plan run
-	curl -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} ${JENKINS_IP_AND_PORT_GLOBAL_VAR}/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorTestLogFile.txt
+	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} ${JENKINS_IP_AND_PORT_GLOBAL_VAR}/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorTestLogFile.txt
 
 	PLAN_NAME="$(cat conorTestLogFile.txt | grep "Building remotely on" | awk -F "/home/jenkins/workspace/" '{print $2}')"
 	TOTAL_PLAN_DURATION="$(cat conorTestLogFile.txt | grep " Finished: SUCCESS" | awk -F " " '{print $1}')"
