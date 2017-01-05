@@ -14,7 +14,7 @@ do
 	echo "Downloading: ${JENKINS_IP_AND_PORT_GLOBAL_VAR}/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog"
 	
 	# Download log file of last successful Jenkins plan run of planURL
-	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} ${JENKINS_IP_AND_PORT_GLOBAL_VAR}/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorGetPlanDurationLogFile.txt
+	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} http://192.168.99.101:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorGetPlanDurationLogFile.txt
 
 	# Extract the plan name
 	PLAN_NAME="$(cat conorGetPlanDurationLogFile.txt | grep "Building remotely on" | awk -F "/home/jenkins/workspace/" '{print $2}')"
