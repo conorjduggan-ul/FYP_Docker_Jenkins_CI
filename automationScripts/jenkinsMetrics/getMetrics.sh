@@ -25,7 +25,7 @@ do
 	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} http://192.168.99.101:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorGetPlanDurationLogFile.txt
 
 	# Extract plan run time and date
-	PLAN_RUN_TIME_DATE="$(cat conorGetPlanDurationLogFile.txt | grep "Plan starting time is:" | awk -F ":" '{print $2}'))"
+	PLAN_RUN_TIME_DATE="$(cat conorGetPlanDurationLogFile.txt | grep "Plan starting time is:" | awk -F "is:" '{print $2}'))"
 	# Extract the plan run duration
 	TOTAL_PLAN_DURATION="$(cat conorGetPlanDurationLogFile.txt | grep " Finished: SUCCESS" | awk -F " " '{print $1}')"
 	
