@@ -25,7 +25,7 @@ do
 	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} http://192.168.99.101:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorGetPlanDurationLogFile.txt
 
 	# Extract plan run time and date
-	PLAN_RUN_TIME_DATE="$(cat conorGetPlanDurationLogFile.txt | grep "Plan starting time is:" | awk -F "is:" '{print $2}'))"
+	PLAN_RUN_TIME_DATE="$(cat conorGetPlanDurationLogFile.txt | grep "Plan starting time is:" | head -1 | awk -F "is:" '{print $2}' | awk -F "'" '{print $1}')"
 	# Extract the plan run duration
 	TOTAL_PLAN_DURATION="$(cat conorGetPlanDurationLogFile.txt | grep " Finished: SUCCESS" | awk -F " " '{print $1}')"
 	
@@ -33,7 +33,10 @@ do
 	echo -e "TOTAL_PLAN_DURATION: $TOTAL_PLAN_DURATION\n\n"
 
 	# Save the log files
-	LogFilepath="/Users/conorduggan/Google Drive/College/Year 4 FYP/Data_Collection/Docker-Jenkins/logs/"
-	cat conorGetPlanDurationLogFile.txt > "${LogFilepath}${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-`echo ${planURL} | awk -F "/" '{print $2}'`-PipelineLogFile.txt"
+	cat conorGetPlanDurationLogFile.txt > "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-`echo ${planURL} | awk -F "/" '{print $3}'`-PipelineLogFile.txt"
+	
+	# Upload log file to AWS S3
+	aws s3 cp "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-`echo ${planURL} | awk -F "/" '{print $2}'`-PipelineLogFile.txt" s3://jenkinslogstore/"${LogFilepath}${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-`echo ${planURL} | awk -F "/" '{print $2}'`-PipelineLogFile.txt"
+	
 	rm -rf conorGetPlanDurationLogFile.txt
 done
