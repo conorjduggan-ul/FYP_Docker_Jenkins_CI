@@ -1,12 +1,20 @@
 #! /bin/bash
 
-# Take in Jenkins, user, password and IP/Port address as arguments
+# Take in Jenkins, user, password and pipeline to check
 JENKINS_USERNAME=$1
 JENKINS_PASSWORD=$2
-JENKINS_IP_AND_PORT_GLOBAL_VAR=$3
+JENKINS_PIPELINE_TO_CHECK=$3
 
-declare -a planArray=("Pipeline_2/job/01_Compile_Project" 
-						"Pipeline_2/job/02_Test_Project_(All_Tests)")
+if [[ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_1" ]]; then
+	IFS=$'\n' read -d '' -r -a planArray < pipeline_1_URLs.txt
+
+elif [[ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_2" ]]; then
+	IFS=$'\n' read -d '' -r -a planArray < pipeline_2_URLs.txt
+
+else
+	echo -e "\n\nERROR: No pipeline to check. Killing program\n\n"
+	exit
+fi
 
 # Loop through stored plan URLs
 for planURL in "${planArray[@]}"
