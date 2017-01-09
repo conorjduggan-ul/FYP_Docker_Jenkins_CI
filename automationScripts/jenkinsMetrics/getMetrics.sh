@@ -21,6 +21,8 @@ for planURL in "${planArray[@]}"
 do
 	echo "Downloading: ${JENKINS_IP_AND_PORT_GLOBAL_VAR}/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog"
 	
+	PLAN_NAME=$(echo ${planURL} | awk -F "/" '{print $3}')
+
 	# Download log file of last successful Jenkins plan run of planURL
 	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} http://192.168.99.101:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorGetPlanDurationLogFile.txt
 
@@ -33,10 +35,10 @@ do
 	echo -e "TOTAL_PLAN_DURATION: $TOTAL_PLAN_DURATION\n\n"
 
 	# Save the log files
-	cat conorGetPlanDurationLogFile.txt > "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-`echo ${planURL} | awk -F "/" '{print $3}'`-PipelineLogFile.txt"
+	cat conorGetPlanDurationLogFile.txt > "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PLAN_NAME}-PipelineLogFile.txt"
 	
 	# Upload log file to AWS S3
-	aws s3 cp "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-`echo ${planURL} | awk -F "/" '{print $2}'`-PipelineLogFile.txt" s3://jenkinslogstore/"${LogFilepath}${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-`echo ${planURL} | awk -F "/" '{print $2}'`-PipelineLogFile.txt"
+	aws s3 cp "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PLAN_NAME}-PipelineLogFile.txt" s3://jenkinslogstore/"${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PLAN_NAME}PipelineLogFile.txt"
 	
 	rm -rf conorGetPlanDurationLogFile.txt
 done
