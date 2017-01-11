@@ -4,8 +4,8 @@ ls -al
 ls -al conor-git-repo/
 ls -al conor-git-repo/softwareProduct/src/main/java/
 
-cd conor-git-repo/softwareProduct/src/main/java/
-javac Calculator.java
+echo -e "Locking Calculator.java while compiling it..."
+flock -x -w 5 conor-git-repo/softwareProduct/src/main/java/Calculator.java sh -c "javac conor-git-repo/softwareProduct/src/main/java/Calculator.java"
 
 if [ -f Calculator.class ]
 then
