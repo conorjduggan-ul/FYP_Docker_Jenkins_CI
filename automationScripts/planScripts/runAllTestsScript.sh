@@ -6,5 +6,5 @@ cd softwareProduct/
 
 echo -e "Locking Calculator.java while testing it..."
 
-# Use flock to lock Calculator.java exclusively while running command. Wait 5 seconds if cannot initially lock 
-flock -x -w 5 src/main/java/Calculator.java sh -c "./gradlew clean test --info"
+# Use flock to lock Calculator.java exclusively while running command. Fail if it doesn't lock immediately
+flock -x -n -E 1 src/main/java/Calculator.java sh -c "./gradlew clean test --info"
