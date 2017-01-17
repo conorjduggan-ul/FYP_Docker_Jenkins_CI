@@ -36,9 +36,18 @@ do
 	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} "http://192.168.99.100:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?time=HH:mm:ss&appendLog" > conorGetPlanDurationLogFile.txt
 
 	PIPELINE_END_TIME=$(cat conorGetPlanDurationLogFile.txt | grep "  Finished: SUCCESS" | awk -F " " '{print $1}')
+
+	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} "http://192.168.99.100:8080/job/${planURL}/lastSuccessfulBuild/api/json?pretty=true" > conorGetPlanDurationLogFile.txt
+
+	PLAN_DURATION_TIME=$(cat conorGetPlanDurationLogFile.txt | grep "  \"duration\" : " | awk -F ": " '{print $2}' | awk -F "," '{print $1}')
+	PLAN_DURATION_TIME=$(awk "BEGIN {print (${PLAN_DURATION_TIME}/1000)/60}")
+
+	echo -e "Plan: ${planURL} duration = ${PLAN_DURATION_TIME} mins" >> tempPlanDurationTime.txt
 done
 
 echo -e "${JENKINS_PIPELINE_TO_CHECK} STARTING TIME IS: ${PIPELINE_STARTING_TIME}\n${JENKINS_PIPELINE_TO_CHECK} END TIME IS: ${PIPELINE_END_TIME}" > "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PIPELINE_END_TIME}-Execution_Time.txt"
+
+cat tempPlanDurationTime.txt >> "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PIPELINE_END_TIME}-Execution_Time.txt"
 
 # Upload log file to AWS S3
 aws s3 cp "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PIPELINE_END_TIME}-Execution_Time.txt" s3://jenkinspipelineduration/"${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PIPELINE_END_TIME}-Execution_Time.txt"
