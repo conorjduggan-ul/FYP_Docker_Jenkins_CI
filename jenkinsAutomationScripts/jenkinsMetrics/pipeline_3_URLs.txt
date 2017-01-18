@@ -1,2 +1,2 @@
-Pipeline_3/job/02_Acceptance_Tests
-Pipeline_3/job/03_Full_Test_Suite
+Pipeline_3_FitNesse_Testing/job/02_Acceptance_Tests
+Pipeline_3_FitNesse_Testing/job/03_Full_Test_Suite
