@@ -11,6 +11,12 @@ if [[ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_1" ]]; then
 elif [[ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_2" ]]; then
 	IFS=$'\n' read -d '' -r -a planArray < pipeline_2_URLs.txt
 
+elif [[ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_3" ]]; then
+	IFS=$'\n' read -d '' -r -a planArray < pipeline_3_URLs.txt
+
+elif [[ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_4" ]]; then
+	IFS=$'\n' read -d '' -r -a planArray < pipeline_4_URLs.txt
+
 else
 	echo -e "\n\nERROR: No pipeline to check. Killing program\n\n"
 	exit
