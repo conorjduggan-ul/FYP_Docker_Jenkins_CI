@@ -1,3 +1,13 @@
+###
+#       Author: Conor Duggan
+#       Email: 13127004@studentmail.ul.ie
+#
+#       Project Title: FYP Jenkins Automation Script - Run All Tests for Calculator code
+#
+#       Usage: Run script without any arguments necessry
+#               e.g. ./runAllTestsScript.sh
+###
+
 #! /bin/bash
 
 echo $USER

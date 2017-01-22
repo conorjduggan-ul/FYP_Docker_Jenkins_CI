@@ -1,3 +1,13 @@
+###
+#       Author: Conor Duggan
+#       Email: 13127004@studentmail.ul.ie
+#
+#       Project Title: FYP Jenkins Automation Script - Run Specifi tests on Calculator code
+#
+#       Usage: Run script passing in the tests to run
+#               e.g. ./runSpecificTests.sh DivisionTest1
+###
+
 #! /bin/bash
 
 TESTS_TO_RUN=$1

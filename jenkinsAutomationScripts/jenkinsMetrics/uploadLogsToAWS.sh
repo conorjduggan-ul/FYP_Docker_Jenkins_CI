@@ -1,3 +1,13 @@
+###
+#       Author: Conor Duggan
+#       Email: 13127004@studentmail.ul.ie
+#
+#       Project Title: FYP Jenkins Automation Script
+#
+#       Usage: Run script passing in jenkins username, password and the pipeline to gather info on. 
+#               e.g. ./uploadLogsToAWS.sh <jenkins:username> <jenkins:password> Pipeline_1
+###
+
 #! /bin/bash
 
 # Take in Jenkins, user, password and pipeline to check

@@ -1,3 +1,13 @@
+###
+#       Author: Conor Duggan
+#       Email: 13127004@studentmail.ul.ie
+#
+#       Project Title: FYP Jenkins Automation Script - Compile Calculator source code
+#
+#       Usage: Run script without any arguments
+#               e.g. ./compileCodeScript.sh
+###
+
 #! /bin/bash
 
 ls -al
