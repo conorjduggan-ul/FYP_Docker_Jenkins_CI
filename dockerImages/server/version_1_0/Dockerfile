@@ -13,7 +13,7 @@ RUN chown -R jenkins:jenkins /var/log/conor-jenkins
 RUN mkdir -p /var/cache/conor-jenkins
 RUN chown -R jenkins:jenkins /var/cache/conor-jenkins
 
-# Install plugins to use docker slave
+# Install plugins to use docker agent
 COPY files/plugins.txt /plugins.txt       
 RUN /usr/local/bin/plugins.sh /plugins.txt
 
