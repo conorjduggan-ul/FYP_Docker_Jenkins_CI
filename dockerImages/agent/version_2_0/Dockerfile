@@ -1,14 +1,11 @@
 FROM centos:7.2.1511
 MAINTAINER Conor Duggan
 
+# Update and Install necessary installations
 RUN yum update -y && \
-         yum clean all
-
-# Install necessary installations
-RUN yum install -y git && \
+		 yum install -y git && \
          yum install -y wget && \
          yum install -y openssh-server && \
-         yum install -y java-1.8.0-openjdk && \
          yum install -y sudo && \
          yum clean all
 
@@ -21,7 +18,6 @@ RUN /usr/bin/ssh-keygen -A
 
 # Create Jenkins User
 RUN useradd jenkins -m -s /bin/bash
-
 RUN mkdir /home/jenkins/.ssh
 
 # Add public key for Jenkins login
