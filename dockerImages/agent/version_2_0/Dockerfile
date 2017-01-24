@@ -3,11 +3,11 @@ MAINTAINER Conor Duggan
 
 # Update and Install necessary installations
 RUN yum update -y && \
-		 yum install -y git && \
-         yum install -y wget && \
-         yum install -y openssh-server && \
-         yum install -y sudo && \
-         yum clean all
+		yum install -y git && \
+		yum install -y wget && \
+		yum install -y openssh-server && \
+		yum install -y sudo && \
+		yum clean all
 
 # Download and install jdk
 RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u112-b15/jdk-8u112-linux-x64.rpm 
