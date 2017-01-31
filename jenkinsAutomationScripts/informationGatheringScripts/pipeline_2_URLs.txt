@@ -1,0 +1,2 @@
+Pipeline_2_Calculator_Combined_Tests/job/01_Compile_Project
+Pipeline_2_Calculator_Combined_Tests/job/02_Test_Project_(All_Tests)
