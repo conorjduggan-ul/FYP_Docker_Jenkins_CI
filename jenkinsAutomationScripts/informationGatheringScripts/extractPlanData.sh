@@ -5,7 +5,7 @@
 #       Project Title: FYP Jenkins Automation Script
 #
 #       Usage: Run script passing in jenkins username, password and the pipeline to gather info on. 
-#               e.g. ./getEntirePipelineExecutionTime.sh <jenkins:username> <jenkins:password> Pipeline_1
+#               e.g. ./extractPlanData.sh <jenkins:username> <jenkins:password> Pipeline_1
 ###
 
 #! /bin/bash
@@ -82,4 +82,4 @@ rm -rf tempPlanDurationTime.txt
 rm -rf conorGetPlanDurationLogFile.txt
 
 # Upload log file to AWS S3
-#aws s3 cp "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PIPELINE_END_TIME}-Execution_Time.txt" s3://jenkinspipelineduration/"${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PIPELINE_END_TIME}-Execution_Time.txt"
+aws s3 cp "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PIPELINE_END_TIME}-Execution_Time.txt" s3://jenkinspipelineduration/"${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PIPELINE_END_TIME}-Execution_Time.txt"
