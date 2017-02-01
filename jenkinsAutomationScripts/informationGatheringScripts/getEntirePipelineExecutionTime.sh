@@ -59,11 +59,14 @@ do
         PLAN_DURATION_TIME=$(cat conorGetPlanDurationLogFile.txt | grep "  \"duration\" : " | awk -F ": " '{print $2}' | awk -F "," '{print $1}')
         PLAN_DURATION_TIME=$(awk "BEGIN {print (${PLAN_DURATION_TIME}/1000)/60}")
 
+        # Extract the Docker Agent ID that hosted the jenkins plan run
+        DOCKER_AGENT_ID=$(cat conorGetPlanDurationLogFile.txt | grep "  \"builtOn\" : \"Docker Host-" | awk -F "Host-" '{print $2}' | awk -F "\"" '{print $1}')     
+
         # Keep adding each plan time for the pipeline together to find the total plan duration time for the pipeline
         TOTAL_PIPELINE_PLAN_TIME=$(awk "BEGIN {print $TOTAL_PIPELINE_PLAN_TIME + $PLAN_DURATION_TIME; exit}")
 
         # Write the duration for the planURL to temp file to be added to final file
-        echo -e "Plan: ${planURL} duration = ${PLAN_DURATION_TIME} mins" >> tempPlanDurationTime.txt
+        echo -e "Plan: ${planURL} duration = ${PLAN_DURATION_TIME} mins on Docker Host = ${DOCKER_AGENT_ID}" >> tempPlanDurationTime.txt
 done
 
 # Write total duration time for pipeline plans to temp file
