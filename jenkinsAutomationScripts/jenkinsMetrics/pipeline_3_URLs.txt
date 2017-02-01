@@ -1,2 +1,0 @@
-Pipeline_3_FitNesse_Testing/job/01_Acceptance_Tests
-Pipeline_3_FitNesse_Testing/job/02_Full_Test_Suite
