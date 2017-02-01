@@ -70,7 +70,7 @@ do
 done
 
 # Write total duration time for pipeline plans to temp file
-echo -e "Total plan duration = ${TOTAL_PIPELINE_PLAN_TIME} mins" >> tempPlanDurationTime.txt
+echo -e "Total Pipeline Duration = ${TOTAL_PIPELINE_PLAN_TIME} mins" >> tempPlanDurationTime.txt
 
 # Write pipelines start and end times to final txt file
 echo -e "${JENKINS_PIPELINE_TO_CHECK} STARTING TIME IS: ${PIPELINE_STARTING_TIME}\n${JENKINS_PIPELINE_TO_CHECK} END TIME IS: ${PIPELINE_END_TIME}" > "${JENKINS_PIPELINE_TO_CHECK}-${PLAN_RUN_TIME_DATE}-${PIPELINE_END_TIME}-Execution_Time.txt"
