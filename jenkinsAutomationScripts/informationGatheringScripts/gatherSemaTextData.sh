@@ -4,8 +4,9 @@
 #
 #       Project Title: FYP Jenkins Automation Script
 #
-#       Usage: Run script passing in the pipeline to gather info on the docker agents used for its last run. 
-#               e.g. ./gatherSemaTextData.sh Pipeline_1
+#       Usage: Run script passing in the pipeline, the SemaText API Key and APP Token to gather 
+#				info on the docker agents used for its last run. 
+#               e.g. ./gatherSemaTextData.sh Pipeline_1 <SemaText_API_KEY> <SemaText_APP_TOKEN>
 ###
 
 #! /bin/bash
@@ -14,6 +15,7 @@ JENKINS_PIPELINE_TO_CHECK=$1
 API_KEY=$2
 APP_TOKEN=$3
 
+# Function that runs curl to get Docker agent metrics from SemaText
 runSemaTextCurlForDockerAgents() {
 
 	metricToCurl=$1
@@ -36,6 +38,7 @@ runSemaTextCurlForDockerAgents() {
 	}"
 }
 
+# Function that runs curl to get OS Host metrics from SemaText
 runSemaTextCurlForHost() {
 
 	metricToCurl=$1
@@ -84,12 +87,14 @@ done
 # Loop through the array of Docker agents IDs and names e.g. 73ad4ebcab2e-furious_pike
 for dockerAgentName in "${DOCKER_AGENT_ID_AND_NAME_ARRAY[@]}"
 do
+	# Get all metric info relating to Docker container
 	runSemaTextCurlForDockerAgents docker.* "${dockerAgentName}" "${PIPELINE_RUN_DATE}" "${PIPELINE_RUN_START_TIME}" "${PIPELINE_RUN_END_TIME}" > "SemaTextData-${PIPELINE_RUN_DATE}_${PIPELINE_RUN_START_TIME}_${PIPELINE_RUN_END_TIME}-${dockerAgentName}.txt"
 	
 	# Upload docker agent metrics data file to AWS S3
 	aws s3 cp "SemaTextData-${PIPELINE_RUN_DATE}_${PIPELINE_RUN_START_TIME}_${PIPELINE_RUN_END_TIME}-${dockerAgentName}.txt" s3://dockeragentmetrics/"SemaTextData-${PIPELINE_RUN_DATE}_${PIPELINE_RUN_START_TIME}_${PIPELINE_RUN_END_TIME}-${dockerAgentName}.txt"
 done
 
+# Get all metric info for host os machine
 runSemaTextCurlForHost os.* "${PIPELINE_RUN_DATE}" "${PIPELINE_RUN_START_TIME}" "${PIPELINE_RUN_END_TIME}" > "SemaTextData-${PIPELINE_RUN_DATE}_${PIPELINE_RUN_START_TIME}_${PIPELINE_RUN_END_TIME}-Host.txt"
 
 # Upload OS metrics data file to AWS S3
