@@ -32,12 +32,12 @@ else
         exit
 fi
 
-echo "Downloading: http://192.168.99.100:8080job/${planArray[0]}/lastSuccessfulBuild/timestamps/?time=HH:mm:ss&appendLog"
+echo "Downloading: http://192.168.99.101:8080job/${planArray[0]}/lastSuccessfulBuild/timestamps/?time=HH:mm:ss&appendLog"
 
 PLAN_NAME=$(echo ${planArray[0]} | awk -F "/" '{print $3}')
 
 # Download log file of last successful Jenkins plan run of planArray[0]
-curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} "http://192.168.99.100:8080/job/${planArray[0]}/lastSuccessfulBuild/timestamps/?time=HH:mm:ss&appendLog" > conorGetPlanDurationLogFile.txt
+curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} "http://192.168.99.101:8080/job/${planArray[0]}/lastSuccessfulBuild/timestamps/?time=HH:mm:ss&appendLog" > conorGetPlanDurationLogFile.txt
 
 PIPELINE_STARTING_TIME=$(cat conorGetPlanDurationLogFile.txt | grep "  Started by user Conor Duggan" | awk -F " " '{print $1}')
 # Extract plan run time and date
@@ -47,13 +47,13 @@ PLAN_RUN_TIME_DATE="$(cat conorGetPlanDurationLogFile.txt | grep "Plan starting 
 for planURL in "${planArray[@]}"
 do
         # Download plan log with timestamp
-        curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} "http://192.168.99.100:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?time=HH:mm:ss&appendLog" > conorGetPlanDurationLogFile.txt
+        curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} "http://192.168.99.101:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?time=HH:mm:ss&appendLog" > conorGetPlanDurationLogFile.txt
 
         # Find the time that the plan ended
         PIPELINE_END_TIME=$(cat conorGetPlanDurationLogFile.txt | grep "  Finished: SUCCESS" | awk -F " " '{print $1}')
 
         # Download the jenkins info from the API
-        curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} "http://192.168.99.100:8080/job/${planURL}/lastSuccessfulBuild/api/json?pretty=true" > conorGetPlanDurationLogFile.txt
+        curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} "http://192.168.99.101:8080/job/${planURL}/lastSuccessfulBuild/api/json?pretty=true" > conorGetPlanDurationLogFile.txt
 
         # Extract the time it took the plan to run
         PLAN_DURATION_TIME=$(cat conorGetPlanDurationLogFile.txt | grep "  \"duration\" : " | awk -F ": " '{print $2}' | awk -F "," '{print $1}')

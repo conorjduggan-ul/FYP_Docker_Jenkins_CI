@@ -35,12 +35,12 @@ fi
 # Loop through stored plan URLs
 for planURL in "${planArray[@]}"
 do
-	echo "Downloading: http://192.168.99.100:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog"
+	echo "Downloading: http://192.168.99.101:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog"
 	
 	PLAN_NAME=$(echo ${planURL} | awk -F "/" '{print $3}')
 
 	# Download log file of last successful Jenkins plan run of planURL
-	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} http://192.168.99.100:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorGetPlanDurationLogFile.txt
+	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} http://192.168.99.101:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorGetPlanDurationLogFile.txt
 
 	# Extract plan run time and date
 	PLAN_RUN_TIME_DATE="$(cat conorGetPlanDurationLogFile.txt | grep "Plan starting time is:" | head -1 | awk -F "is:" '{print $2}' | awk -F "'" '{print $1}')"
