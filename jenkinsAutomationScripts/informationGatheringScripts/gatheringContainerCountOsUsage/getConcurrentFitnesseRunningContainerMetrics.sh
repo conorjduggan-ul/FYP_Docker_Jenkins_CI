@@ -1,10 +1,10 @@
 # /bin/bash
 
-API_KEY="f4be76f5-119a-435c-807b-a39049341f50"
-APP_TOKEN="e37df2a5-5d3d-48c8-803e-5a0844a577ed"
+API_KEY="<REDACTED>"
+APP_TOKEN="<REDACTED>"
 TEST_START_TIME="2017-02-19 19:16:00"
 TEST_END_TIME="2017-02-19 19:26:00"
-FILEPATH="/Users/conorduggan/Data_Collection/Concurrent_Fitnesse_Running_Container_Usage/Concurrent_Fitnesse_Running_Container_Usage_5/2017-02-21_10-50/"
+FILEPATH="<REDACTED>"
 
 # Function that runs curl to get Docker agent metrics from SemaText
 runSemaTextCurlForDockerAgents() {
