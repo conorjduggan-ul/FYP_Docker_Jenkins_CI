@@ -15,16 +15,16 @@ JENKINS_USERNAME=$1
 JENKINS_PASSWORD=$2
 JENKINS_PIPELINE_TO_CHECK=$3
 
-if [ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_1" ]; then
+if [[ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_1" ]]; then
 	IFS=$'\n' read -d '' -r -a planArray < pipeline_1_URLs.txt
 
-elif [ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_2" ]; then
+elif [[ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_2" ]]; then
 	IFS=$'\n' read -d '' -r -a planArray < pipeline_2_URLs.txt
 
-elif [ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_3" ]; then
+elif [[ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_3" ]]; then
 	IFS=$'\n' read -d '' -r -a planArray < pipeline_3_URLs.txt
 
-elif [ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_4" ]; then
+elif [[ "$JENKINS_PIPELINE_TO_CHECK" == "Pipeline_4" ]]; then
 	IFS=$'\n' read -d '' -r -a planArray < pipeline_4_URLs.txt
 
 else
@@ -35,12 +35,12 @@ fi
 # Loop through stored plan URLs
 for planURL in "${planArray[@]}"
 do
-	echo "Downloading: http://192.168.99.100:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog"
+	echo "Downloading: http://192.168.99.101:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog"
 	
 	PLAN_NAME=$(echo ${planURL} | awk -F "/" '{print $3}')
 
 	# Download log file of last successful Jenkins plan run of planURL
-	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} http://192.168.99.100:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorGetPlanDurationLogFile.txt
+	curl -v -u ${JENKINS_USERNAME}:${JENKINS_PASSWORD} http://192.168.99.101:8080/job/${planURL}/lastSuccessfulBuild/timestamps/?elapsed=HH:mm:ss.S\&appendLog > conorGetPlanDurationLogFile.txt
 
 	# Extract plan run time and date
 	PLAN_RUN_TIME_DATE="$(cat conorGetPlanDurationLogFile.txt | grep "Plan starting time is:" | head -1 | awk -F "is:" '{print $2}' | awk -F "'" '{print $1}')"
