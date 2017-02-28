@@ -1,0 +1,2 @@
+# Run script to start Docker Container and capture start up timing
+* * * * * <REDACTED>/getDockerContainerStartUpTime.sh
