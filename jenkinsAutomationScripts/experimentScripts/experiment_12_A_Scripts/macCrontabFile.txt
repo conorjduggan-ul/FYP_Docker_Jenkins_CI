@@ -1,0 +1,2 @@
+# Run script to capture Docker Machine Disk Size
+0 * * * * <REDACTED>/getDockerMachineDiskSize.sh
