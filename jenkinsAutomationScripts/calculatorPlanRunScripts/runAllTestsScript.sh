@@ -11,7 +11,7 @@
 #! /bin/bash
 
 echo $USER
-export JAVA_HOME=/usr/java/jdk1.8.0_112
+#export JAVA_HOME=/usr/java/jdk1.8.0_112
 cd softwareProduct_calculator/
 
 echo -e "Locking Calculator.java while testing it..."
