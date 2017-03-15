@@ -28,7 +28,7 @@ elif [ "$JENKINS_PIPELINE_TO_CHECK" = "Pipeline_4" ]; then
 	IFS=$'\n' read -d '' -r -a planArray < pipeline_4_URLs.txt
 
 else
-	echo -e "\n\nERROR: No pipeline to check. Killing program\n\n"
+	echo -e "\n\nERROR: No pipeline to check. Killing program\n\n "
 	exit
 fi
 
