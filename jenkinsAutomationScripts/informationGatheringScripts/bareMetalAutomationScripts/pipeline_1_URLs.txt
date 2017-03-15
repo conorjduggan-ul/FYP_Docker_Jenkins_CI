@@ -1,0 +1,9 @@
+Pipeline_1_Calculator_Split_Tests/job/01_Compile_Project
+Pipeline_1_Calculator_Split_Tests/job/02_Addition_Tests_(Suite_01)
+Pipeline_1_Calculator_Split_Tests/job/03_Addition_Tests_(Suite_02)
+Pipeline_1_Calculator_Split_Tests/job/04_Subtraction_Tests_(Suite_01)
+Pipeline_1_Calculator_Split_Tests/job/05_Subtraction_Tests_(Suite_02)
+Pipeline_1_Calculator_Split_Tests/job/06_Multiplication_Tests_(Suite_01)
+Pipeline_1_Calculator_Split_Tests/job/07_Multiplication_Tests_(Suite_02)
+Pipeline_1_Calculator_Split_Tests/job/08_Division_Tests_(Suite_01)
+Pipeline_1_Calculator_Split_Tests/job/09_Division_Tests_(Suite_02)
