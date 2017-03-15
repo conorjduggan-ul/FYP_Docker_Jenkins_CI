@@ -19,7 +19,9 @@ if [ "$JENKINS_PIPELINE_TO_CHECK" = "Pipeline_1" ]; then
 	IFS=$'\n' read -d '' -r -a planArray < pipeline_1_URLs.txt
 
 elif [ "$JENKINS_PIPELINE_TO_CHECK" = "Pipeline_2" ]; then
-	IFS=$'\n' read -d '' -r -a planArray < pipeline_2_URLs.txt
+	#IFS=$'\n' read -d '' -r -a planArray < pipeline_2_URLs.txt
+	planArray[0]='Pipeline_2_Calculator_Combined_Tests/job/01_Compile_Project'
+	planArray[1]='Pipeline_2_Calculator_Combined_Tests/job/02_Test_Project_(All_Tests)'
 
 elif [ "$JENKINS_PIPELINE_TO_CHECK" = "Pipeline_3" ]; then
 	IFS=$'\n' read -d '' -r -a planArray < pipeline_3_URLs.txt
