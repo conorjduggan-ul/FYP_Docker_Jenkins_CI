@@ -1,3 +1,5 @@
+#! /bin/bash
+
 ###
 #       Author: Conor Duggan
 #       Email: 13127004@studentmail.ul.ie
@@ -7,8 +9,6 @@
 #       Usage: Run script passing in jenkins username, password and the pipeline to gather info on. 
 #               e.g. ./uploadLogsToAWS.sh <jenkins:username> <jenkins:password> Pipeline_1
 ###
-
-#! /bin/bash
 
 # Take in Jenkins, user, password and pipeline to check
 JENKINS_USERNAME=$1
