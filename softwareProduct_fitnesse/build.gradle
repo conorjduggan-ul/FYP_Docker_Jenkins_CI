@@ -5,7 +5,7 @@
    - slim (deps: common, networking)
    - common
    - networking
-   - ant
+   - ant 
    - fitnesse, the wiki server
  - Move file creation to plugin
 */
