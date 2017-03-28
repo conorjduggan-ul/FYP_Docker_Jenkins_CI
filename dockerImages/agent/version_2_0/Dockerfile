@@ -33,7 +33,7 @@ RUN chmod 700 /home/jenkins/.ssh
 RUN echo "jenkins  ALL=(ALL)  ALL" >> etc/sudoers
 
 # Set JAVA_HOME env variable
-ENV JAVA_HOME=/usr/java/jdk1.8.0_60/
+ENV JAVA_HOME=/usr/java/jdk1.8.0_112/
 
 # Expose port 22 for SSH
 EXPOSE 22
